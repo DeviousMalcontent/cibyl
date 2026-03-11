@@ -22,6 +22,8 @@ jobs:
     - name: Build
       run: |
           pwd
-          cd ../toolchain
+          cd toolchain
           make #
           dir
+
+          export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin
