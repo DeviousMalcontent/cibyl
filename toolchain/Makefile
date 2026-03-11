@@ -24,7 +24,7 @@ crosstool_install: crosstool-ng-1.28.0
 toolchain_build: ct-ng.config crosstool_install
 	install -d $@
 	cp ct-ng.config $@/.config
-	cd $@ && ../crosstool_install/bin/ct-ng upgradeconfig && ../crosstool_install/bin/ct-ng build.$(JOBS)
+	cd $@ && ../crosstool_install/bin/ct-ng upgradeconfig && ../crosstool_install/bin/ct-ng build
 	# This is slow AS FUCK
 	# How did yall have time for rebuilding this in... ...whatever year it was before google code? On hardware that was probably much older?
 	# Might be a personal issue not gonna lie, maybe I should try Gentoo just for the patience. I've heard that it severely decreases fertility rates, however.
