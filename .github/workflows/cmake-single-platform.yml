@@ -21,7 +21,8 @@ jobs:
 
     - name: Build
       run: |
-          pwd
+          sudo apt-get install help2man
+
           cd toolchain
           make #
           dir
