@@ -36,7 +36,8 @@ jobs:
           tar -xjf mips-cibyl-elf.tar.bz2
           dir
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin
-          ./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-linux-gcc
+          ./mips-cibyl-elf-gcc
+#          ./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
 #          sudo rsync -a /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/ /cibyl/
 
     - name: Build translator and the cibyl libraries
