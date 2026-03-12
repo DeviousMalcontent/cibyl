@@ -30,6 +30,7 @@ jobs:
 
     - name: Setup environment
       run: |
+          cd toolchain
           pwd
           wget https://github.com/DeviousMalcontent/cibyl/releases/download/v7/mips-cibyl-elf.tar.bz2
           tar -xjf mips-cibyl-elf.tar.bz2
