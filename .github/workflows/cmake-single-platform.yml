@@ -43,6 +43,109 @@ jobs:
           which mips-cibyl-elf-gcc
 #          sudo rsync -a /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/ /cibyl/
 
+    - name: Update python lib
+      run: |
+          sudo apt install 2to3
+          pip install reindent
+          pip install config
+
+          2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-config -W
+          2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-gdbserver -W
+          2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-generate-c-header -W
+          2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-generate-cibar -W
+          2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-generate-java-wrappers -W
+          2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-generate-syscall-db -W
+          2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-mips2java -W
+          2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-peephole-optimize -W
+          2to3 --output-dir=cibyl-bin-linux32-21/mips-cibyl-elf/bin/python -W -n cibyl-bin-linux32-21/mips-cibyl-elf/bin/python
+          
+          reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-config
+          reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-generate-c-header
+          reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-generate-cibar
+          reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-generate-java-wrappers
+          reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-generate-syscall-db
+          reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-mips2java
+          reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-peephole-optimize
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Mips/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Mips/instruction.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Mips/javamethod.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Mips/mips.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Mips/optimizer.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/Builtins/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/Builtins/base.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/Builtins/builtins.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/Builtins/exceptions.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/Builtins/softfloat.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/Mips/
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/Mips/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/Mips/mult.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/Optimization/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/basicblock.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/bytecode.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/codeblock.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/function.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/javaclass.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/labelmanager.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/profile.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/register.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/translator.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/CompiledHelpers/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/CompiledHelpers/helpers.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/GdbServer/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/GdbServer/gdbmips.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/GdbServer/gdbserver.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/GdbServer/jdb.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/GdbServer/packets.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/classes.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/emit.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/template.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/const_and_inc.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/const_and_pop.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/const_store_aload.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/double_pop.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/double_stores.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/dup_pop.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/getstatic_v1_pop.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/goto_next_line.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/jal_arguments.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/jal_return.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/memory-getstatic.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/push_store_inc.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/putstatic_getstatic.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/templates/unused_label.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/function.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/__init__.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/config.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
+          reindent -n /home/runner/work/cibyl/cibyl/tools/python/which.py
+
+          sed -i '19s#.*#FUNCTION_NAME="([A-Z,a-z,0-9,_,\\\\(,\\\\)]+)"#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
+          sed -i '25s#.*#comment = re.compile("[ ,\\t]*;([A-Z,a-z,0-9,_,\\\\(,\\\\), ]+):")#' //home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
+          sed -i '45s#.*#instruction = re.compile("\\t([A-Z,a-z,0-9,_,\\\\(,\\\\), ]+)")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
+
+          sed -i '178s#.*#                for line in readPreprocessedFile("/home/cibyl/mips-cibyl-elf/sys-root/usr/share/syscalls/java/imports", self.defines):#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+
+          sed -i '15s#.*#from Cibyl.BinaryTranslation.Mips.instruction import Instruction#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/function.py
+          sed -i '16s#.*#from Cibyl.BinaryTranslation.Mips import mips#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/function.py
+
+          sed -i "301iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '301s#.*#        data = struct.pack("P", 0x11b1c1d1)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i "302iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '302s#.*#        hex_str = data.hex()#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '303s#.*#        of.write(hex_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+
+          sed -i "304iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '304s#.*#        data2 = struct.pack("P", len(self.dirs))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i "305iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '305s#.*#        dir_str = data2.hex()#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '306s#.*#        of.write(dir_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+
     - name: Build translator and the cibyl libraries
       run: |
           cd /home/runner/work/cibyl/cibyl/
