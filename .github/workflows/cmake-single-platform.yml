@@ -30,13 +30,11 @@ jobs:
 
     - name: Setup environment
       run: |
-          cd toolchain
           pwd
           wget https://github.com/DeviousMalcontent/cibyl/releases/download/v7/mips-cibyl-elf.tar.bz2
           tar -xjf mips-cibyl-elf.tar.bz2
           dir
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin
-          which mips-cibyl-elf-gcc
 #          sudo rsync -a /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/ /cibyl/
 
     - name: Build translator and the cibyl libraries
