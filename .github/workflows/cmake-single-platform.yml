@@ -35,7 +35,7 @@ jobs:
           wget https://github.com/DeviousMalcontent/cibyl/releases/download/v7/mips-cibyl-elf.tar.bz2
           tar -xjf mips-cibyl-elf.tar.bz2
           dir
-          export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin
+          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin
           ./mips-linux-gcc
 #          sudo rsync -a /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/ /cibyl/
 
