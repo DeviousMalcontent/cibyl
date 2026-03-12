@@ -36,6 +36,8 @@ jobs:
           tar -xjf mips-cibyl-elf.tar.bz2
           dir
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin
+          cd /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf
+          dir
 #          ./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
 #          sudo rsync -a /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/ /cibyl/
 
