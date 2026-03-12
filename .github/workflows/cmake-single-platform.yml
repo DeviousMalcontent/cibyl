@@ -19,14 +19,25 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Build Compiler
-      run: |
-          sudo apt-get install help2man
-          sudo apt-get install libtool-bin
+#    - name: Build Compiler
+#      run: |
+#          sudo apt-get install help2man
+#          sudo apt-get install libtool-bin
+#
+#          cd toolchain
+#          make #
+#          export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin
 
+    - name: Setup environment
+      run: |
           cd toolchain
-          make #
+          pwd
+          wget https://github.com/DeviousMalcontent/cibyl/releases/download/v7/mips-cibyl-elf.tar.bz2
+          tar -xjf mips-cibyl-elf.tar.bz2
+          dir
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin
+          which mips-cibyl-elf-gcc
+#          sudo rsync -a /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/ /cibyl/
 
     - name: Build translator and the cibyl libraries
       run: |
