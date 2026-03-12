@@ -57,7 +57,7 @@ jobs:
           2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-generate-syscall-db -W
           2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-mips2java -W
           2to3 /home/runner/work/cibyl/cibyl/tools/cibyl-peephole-optimize -W
-          2to3 --output-dir=cibyl-bin-linux32-21/mips-cibyl-elf/bin/python -W -n cibyl-bin-linux32-21/mips-cibyl-elf/bin/python
+          2to3 --output-dir=/home/runner/work/cibyl/cibyl/tools/python -W -n /home/runner/work/cibyl/cibyl/tools/python
           
           reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-config
           reindent -n /home/runner/work/cibyl/cibyl/tools/cibyl-generate-c-header
