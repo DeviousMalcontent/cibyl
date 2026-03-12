@@ -24,6 +24,9 @@ jobs:
           cd build
           cmake ../
           make && make install
+          pwd
+          dir
+          echo -- done! --
           exit.
 
     - name: Build Compiler
