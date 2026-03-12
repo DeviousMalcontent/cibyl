@@ -19,10 +19,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-#    - name: Build Compiler
-#      run: |
-#          sudo apt-get install help2man
-#          sudo apt-get install libtool-bin
+    - name: Build Compiler
+      run: |
+          sudo apt-get install help2man
+          sudo apt-get install libtool-bin
+#          sudo apt-get install libelf-dev
 #
 #          cd toolchain
 #          make #
