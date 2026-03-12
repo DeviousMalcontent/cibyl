@@ -39,7 +39,8 @@ jobs:
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin
           cd /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf
           dir
-#          ./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+          alias mips-cibyl-elf-gcc='./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+          which mips-cibyl-elf-gcc
 #          sudo rsync -a /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/ /cibyl/
 
     - name: Build translator and the cibyl libraries
