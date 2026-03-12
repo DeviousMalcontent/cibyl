@@ -19,6 +19,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Build translator and the cibyl libraries
+      run: |
+          cd build
+          cmake ../
+          make && make install
+          exit.
+
     - name: Build Compiler
       run: |
           sudo apt-get install help2man
@@ -26,10 +33,6 @@ jobs:
 
           cd toolchain
           make #
-          echo --- here ---
-          pwd
-          dir
-
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin
 
     - name: Upload Builds
