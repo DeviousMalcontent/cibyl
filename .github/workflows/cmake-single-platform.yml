@@ -165,7 +165,7 @@ jobs:
           sed -i '315s#.*#        of.write(arg_offs_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           
           sed -i "316iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
-          sed -i '316s#.*#        data4 = struct.pack("P", strtab_offs))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '316s#.*#        data4 = struct.pack("P", strtab_offs)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i "317iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '317s#.*#        strtab_offs_str = data4.hex()#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '318s#.*#        of.write(strtab_offs_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
