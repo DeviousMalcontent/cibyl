@@ -190,6 +190,12 @@ jobs:
           sed -i "342iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '342s#.*#            of.write(ppp_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
 
+          sed -i "346iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '346s#.*#            data8 = struct.pack("PPPP", 0, a[0], a[1], a[2])#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i "347iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '347s#.*#            pppp_str = data8.hex()#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '348s#.*#            of.write(pppp_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+
     - name: Build translator and the cibyl libraries
       run: |
           cd /home/runner/work/cibyl/cibyl/
