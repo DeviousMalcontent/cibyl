@@ -142,7 +142,9 @@ jobs:
 
           echo -- 4
           sed -i '17s#.*#FN = "(?:[.]*)[_,0-9,a-z,A-Z,\\\\:,\\*,\\,\\(,\\), ,<,>]+"#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
+          echo -- 5
           sed -i '20s#.*#sectionRegexp = re.compile("[ \\t]*\\\\[([ ,0-9]+)\\]+[ ,\\t]+([A-Z,a-z,0-9,_,\\.]+)[ ,\\t]+([A-Z,_,\\.]+)[ ,\\t]+("+ADR+")[ ,\\t]+("+ADR+")[ ,\\t]+("+ADR+")")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
+          echo -- 6
           sed -i '21s#.*#relocationSectionRegexp = re.compile("Relocation section '.rel([\\\\.,A-Z,a-z,0-9,_]+)' at offset")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
 
           sed -i '178s#.*#                for line in readPreprocessedFile("/home/cibyl/mips-cibyl-elf/sys-root/usr/share/syscalls/java/imports", self.defines):#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
