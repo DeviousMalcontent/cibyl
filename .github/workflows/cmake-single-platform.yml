@@ -138,7 +138,7 @@ jobs:
           echo -- 3
           sed -i '14s#.*#fnRegexp = re.compile("([A-Z,a-z,0-9,_,\\\\*]+) ([A-Z,a-z,0-9,_]+)\\(([A-Z,a-z,0-9,\\\\*,\\,, ,_]*)\\);[ ]*(\\/\\\\*[A-Z,a-z, ]+\\\\*\\/)*")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/function.py
           sed -i '237s#.*#syscallDefinitionRegexp = re.compile("[ \\t]*static inline _syscall([0-9]+)\\\\(([A-Z,a-z,0-9,_,\\*]+)[ \\t\\,]*,([A-Z,a-z,0-9,_]+)[ \\t]*([A-Z,a-z,0-9,\\*,\\,, ,_]*)\\) (\\/\\*[ ]+[A-Z,a-z,_,0-9, ]+[ ]+\\*\\/)*")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/function.py
-          sed -i '238s#.*#nrRegexp = re.compile("#define __NR_([a-z,A-Z,0-9,_]+) ([0-9]+) \\\\/\\*[ ]+([A-Z,a-z, ,_,0-9,.,-]+)[ ]+\\*\\\\/*")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/function.py
+          sed -i '238s$.*$nrRegexp = re.compile("#define __NR_([a-z,A-Z,0-9,_]+) ([0-9]+) \\\\/\\*[ ]+([A-Z,a-z, ,_,0-9,.,-]+)[ ]+\\*\\\\/*")$' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/function.py
 
           echo -- 4
           sed -i '17s#.*#FN = "(?:[.]*)[_,0-9,a-z,A-Z,\\\\:,\\*,\\,\\(,\\), ,<,>]+"#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
