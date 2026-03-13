@@ -125,10 +125,12 @@ jobs:
           reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
           reindent -n /home/runner/work/cibyl/cibyl/tools/python/which.py
 
+          ehco -- 1
           sed -i '19s#.*#FUNCTION_NAME="([A-Z,a-z,0-9,_,\\\\(,\\\\)]+)"#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
           sed -i '25s#.*#comment = re.compile("[ ,\\t]*;([A-Z,a-z,0-9,_,\\\\(,\\\\), ]+):")#' //home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
           sed -i '45s#.*#instruction = re.compile("\\t([A-Z,a-z,0-9,_,\\\\(,\\\\), ]+)")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
 
+          ehco -- 2
           sed -i '76s#.*#		"Get the label on address \\\\emph{address}"#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/codeblock.py
           sed -i '14s#.*#findRegexp = re.compile("[ ,\\t,a-z,A-Z,0-9,_,\\\\.]+Cibyl[0-9]*\.")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/profile.py
           sed -i '15s#.*#functionNameRegexp = re.compile("Cibyl[0-9]*\\\\.([a-z,A-Z,_,0-9]+)")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/profile.py
