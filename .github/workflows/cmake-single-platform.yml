@@ -147,25 +147,25 @@ jobs:
           sed -i '306s#.*#        of.write(dir_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
 
           sed -i "307iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
-          sed -i '307s#.*#        data3 = of.write(struct.pack("P", len(self.syscallSets)))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '307s#.*#        data3 = struct.pack("P", len(self.syscallSets))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i "308iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '308s#.*#        syscall_str = data3.hex()#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '309s#.*#        of.write(syscall_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           
           sed -i "310iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
-          sed -i '310s#.*#        data4 = of.write(struct.pack("P", len(out)) )#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '310s#.*#        data4 = struct.pack("P", len(out))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i "311iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '311s#.*#        out_str = data3.hex()#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '312s#.*#        of.write(out_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           
           sed -i "313iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
-          sed -i '313s#.*#        data4 = of.write(struct.pack("P", arg_offs))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '313s#.*#        data4 = (struct.pack("P", arg_offs))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i "314iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '314s#.*#        arg_offs_str = data4.hex()#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '315s#.*#        of.write(arg_offs_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           
           sed -i "316iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
-          sed -i '316s#.*#        data4 = f.write(struct.pack("P", strtab_offs))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
+          sed -i '316s#.*#        data4 = struct.pack("P", strtab_offs))#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i "317iblank" /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '317s#.*#        strtab_offs_str = data4.hex()#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
           sed -i '318s#.*#        of.write(strtab_offs_str)#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/syscallgenerator.py
