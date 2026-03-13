@@ -125,20 +125,22 @@ jobs:
           reindent -n /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
           reindent -n /home/runner/work/cibyl/cibyl/tools/python/which.py
 
-          ehco -- 1
+          echo -- 1
           sed -i '19s#.*#FUNCTION_NAME="([A-Z,a-z,0-9,_,\\\\(,\\\\)]+)"#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
           sed -i '25s#.*#comment = re.compile("[ ,\\t]*;([A-Z,a-z,0-9,_,\\\\(,\\\\), ]+):")#' //home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
           sed -i '45s#.*#instruction = re.compile("\\t([A-Z,a-z,0-9,_,\\\\(,\\\\), ]+)")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/PeepholeOptimizer/parse.py
 
-          ehco -- 2
+          echo -- 2
           sed -i '76s#.*#		"Get the label on address \\\\emph{address}"#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/codeblock.py
           sed -i '14s#.*#findRegexp = re.compile("[ ,\\t,a-z,A-Z,0-9,_,\\\\.]+Cibyl[0-9]*\.")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/profile.py
           sed -i '15s#.*#functionNameRegexp = re.compile("Cibyl[0-9]*\\\\.([a-z,A-Z,_,0-9]+)")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/BinaryTranslation/profile.py
 
+          echo -- 3
           sed -i '14s#.*#fnRegexp = re.compile("([A-Z,a-z,0-9,_,\\\\*]+) ([A-Z,a-z,0-9,_]+)\\(([A-Z,a-z,0-9,\\\\*,\\,, ,_]*)\\);[ ]*(\\/\\\\*[A-Z,a-z, ]+\\\\*\\/)*")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/function.py
           sed -i '237s#.*#syscallDefinitionRegexp = re.compile("[ \\t]*static inline _syscall([0-9]+)\\\\(([A-Z,a-z,0-9,_,\\*]+)[ \\t\\,]*,([A-Z,a-z,0-9,_]+)[ \\t]*([A-Z,a-z,0-9,\\*,\\,, ,_]*)\\) (\\/\\*[ ]+[A-Z,a-z,_,0-9, ]+[ ]+\\*\\/)*")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/function.py
           sed -i '238s#.*#nrRegexp = re.compile("#define __NR_([a-z,A-Z,0-9,_]+) ([0-9]+) \\\\/\\*[ ]+([A-Z,a-z, ,_,0-9,.,-]+)[ ]+\\*\\\\/*")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/SyscallHandling/function.py
 
+          echo -- 4
           sed -i '17s#.*#FN = "(?:[.]*)[_,0-9,a-z,A-Z,\\\\:,\\*,\\,\\(,\\), ,<,>]+"#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
           sed -i '20s#.*#sectionRegexp = re.compile("[ \\t]*\\\\[([ ,0-9]+)\\]+[ ,\\t]+([A-Z,a-z,0-9,_,\\.]+)[ ,\\t]+([A-Z,_,\\.]+)[ ,\\t]+("+ADR+")[ ,\\t]+("+ADR+")[ ,\\t]+("+ADR+")")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
           sed -i '21s#.*#relocationSectionRegexp = re.compile("Relocation section '.rel([\\\\.,A-Z,a-z,0-9,_]+)' at offset")#' /home/runner/work/cibyl/cibyl/tools/python/Cibyl/elf.py
