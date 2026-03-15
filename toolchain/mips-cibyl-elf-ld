@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+SCRIPT=$(readlink -f "$0")
+P=$(dirname "$SCRIPT")
 
-P=`dirname $0`
+echo "mips-cibyl-elf-ld"
 
 $P/mips-cibyl-elf-ld.real -EB --emit-relocs $*
