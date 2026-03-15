@@ -14,44 +14,44 @@ import re
 from Cibyl.PeepholeOptimizer.template import Template, addTemplate
 from Cibyl.PeepholeOptimizer.classes import *
 
-#	getstatic
-#	pop
+#       getstatic
+#       pop
 #->
 #
 class MatchPop(Template):
     def __init__(self):
-	Template.__init__(self,
-			  [{"class" : Getstatic},
-			   {"class" : Pop},
-			   ]
-			  )
+        Template.__init__(self,
+                          [{"class" : Getstatic},
+                           {"class" : Pop},
+                           ]
+                          )
 
     def match(self, fn, items):
-	return True
+        return True
 
     # make the iinc a nop and replace the const
     def execute(self, fn, items):
-	items[0] = Nop()
-	items[1] = Nop()
-	return items
+        items[0] = Nop()
+        items[1] = Nop()
+        return items
 
-#	getstatic
-#	pop2
+#       getstatic
+#       pop2
 #->
 #       pop
 class MatchPop2(Template):
     def __init__(self):
-	Template.__init__(self,
-			  [{"class" : Getstatic},
-			   {"class" : Pop2},
-			   ]
-			  )
+        Template.__init__(self,
+                          [{"class" : Getstatic},
+                           {"class" : Pop2},
+                           ]
+                          )
 
     # make the iinc a nop and replace the const
     def execute(self, fn, items):
-	items[0] = Nop()
-	items[1] = Pop()
-	return items
+        items[0] = Nop()
+        items[1] = Pop()
+        return items
 
 addTemplate(MatchPop())
 addTemplate(MatchPop2())

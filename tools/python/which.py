@@ -19,7 +19,7 @@ whichall(command, path=None, verbose=0, exts=None)
 whichgen(command, path=None, verbose=0, exts=None)
     Return a generator which will yield full paths to all matches of the
     given command on the path.
-    
+
 By default the PATH environment variable is searched (as well as, on
 Windows, the AppPaths key in the registry), but a specific 'path' list
 to search may be specified as well.  On Windows, the PATHEXT environment
@@ -91,13 +91,13 @@ def _getRegisteredExecutable(exeName):
     if sys.platform.startswith('win'):
         if os.path.splitext(exeName)[1].lower() != '.exe':
             exeName += '.exe'
-        import _winreg
+        import winreg
         try:
             key = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\" +\
                   exeName
-            value = _winreg.QueryValue(_winreg.HKEY_LOCAL_MACHINE, key)
+            value = winreg.QueryValue(winreg.HKEY_LOCAL_MACHINE, key)
             registered = (value, "from HKLM\\"+key)
-        except _winreg.error:
+        except winreg.error:
             pass
         if registered and not os.path.exists(registered[0]):
             registered = None
@@ -136,12 +136,12 @@ def _cull(potential, matches, verbose=0):
             matches.append(potential)
             return potential
 
-        
+
 #---- module API
 
 def whichgen(command, path=None, verbose=0, exts=None):
     """Return a generator of full paths to the given command.
-    
+
     "command" is a the name of the executable to search for.
     "path" is an optional alternate path list to search. The default it
         to use the PATH environment variable.
@@ -234,7 +234,7 @@ def whichgen(command, path=None, verbose=0, exts=None):
 def which(command, path=None, verbose=0, exts=None):
     """Return the full path to the first match of the given command on
     the path.
-    
+
     "command" is a the name of the executable to search for.
     "path" is an optional alternate path list to search. The default it
         to use the PATH environment variable.
@@ -250,7 +250,7 @@ def which(command, path=None, verbose=0, exts=None):
     If no match is found for the command, a WhichError is raised.
     """
     try:
-        match = whichgen(command, path, verbose, exts).next()
+        match = next(whichgen(command, path, verbose, exts))
     except StopIteration:
         raise WhichError("Could not find '%s' on the path." % command)
     return match
@@ -258,7 +258,7 @@ def which(command, path=None, verbose=0, exts=None):
 
 def whichall(command, path=None, verbose=0, exts=None):
     """Return a list of full paths to all matches of the given command
-    on the path.  
+    on the path.
 
     "command" is a the name of the executable to search for.
     "path" is an optional alternate path list to search. The default it
@@ -287,17 +287,17 @@ def main(argv):
     try:
         optlist, args = getopt.getopt(argv[1:], 'haVvqp:e:',
             ['help', 'all', 'version', 'verbose', 'quiet', 'path=', 'exts='])
-    except getopt.GetoptError, msg:
+    except getopt.GetoptError as msg:
         sys.stderr.write("which: error: %s. Your invocation was: %s\n"\
                          % (msg, argv))
         sys.stderr.write("Try 'which --help'.\n")
         return 1
     for opt, optarg in optlist:
         if opt in ('-h', '--help'):
-            print _cmdlnUsage
+            print(_cmdlnUsage)
             return 0
         elif opt in ('-V', '--version'):
-            print "which %s" % __version__
+            print("which %s" % __version__)
             return 0
         elif opt in ('-a', '--all'):
             all = 1
@@ -325,9 +325,9 @@ def main(argv):
         nmatches = 0
         for match in whichgen(arg, path=altpath, verbose=verbose, exts=exts):
             if verbose:
-                print "%s (%s)" % match
+                print("%s (%s)" % match)
             else:
-                print match
+                print(match)
             nmatches += 1
             if not all:
                 break
@@ -338,5 +338,3 @@ def main(argv):
 
 if __name__ == "__main__":
     sys.exit( main(sys.argv) )
-
-

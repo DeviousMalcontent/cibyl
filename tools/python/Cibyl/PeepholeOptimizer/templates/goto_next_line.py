@@ -14,31 +14,31 @@ import re
 from Cibyl.PeepholeOptimizer.template import Template, addTemplate
 from Cibyl.PeepholeOptimizer.classes import *
 
-#	goto LABEL
+#       goto LABEL
 #LABEL:
 #->
 #LABEL:
 class MatchClass(Template):
     def __init__(self):
-	Template.__init__(self,
-			  [{"class" : Goto},
-			   {"class" : Label},
-			   ]
-			  )
+        Template.__init__(self,
+                          [{"class" : Goto},
+                           {"class" : Label},
+                           ]
+                          )
 
     def match(self, fn, items):
-	if items[0].target != items[1].name:
-	    return False
-	return True
+        if items[0].target != items[1].name:
+            return False
+        return True
 
     # The action here is simple - just remove the instruction
     def execute(self, fn, items):
-	items[0] = Nop()
-	return items # Keep the label
+        items[0] = Nop()
+        return items # Keep the label
 
 addTemplate(MatchClass())
 
-#	goto LABEL
+#       goto LABEL
 #LABEL2:
 #LABEL:
 #->
@@ -46,21 +46,21 @@ addTemplate(MatchClass())
 #LABEL:
 class MatchClass2(Template):
     def __init__(self):
-	Template.__init__(self,
-			  [{"class" : Goto},
-			   {"class" : Label},
-			   {"class" : Label},
-			   ]
-			  )
+        Template.__init__(self,
+                          [{"class" : Goto},
+                           {"class" : Label},
+                           {"class" : Label},
+                           ]
+                          )
 
     def match(self, fn, items):
-	if items[0].target != items[2].name:
-	    return False
-	return True
+        if items[0].target != items[2].name:
+            return False
+        return True
 
     # The action here is simple - just remove the instruction
     def execute(self, fn, items):
-	items[0] = Nop()
-	return items # Keep the label
+        items[0] = Nop()
+        return items # Keep the label
 
 addTemplate(MatchClass2())

@@ -14,23 +14,23 @@ import re
 from Cibyl.PeepholeOptimizer.template import Template, addTemplate
 from Cibyl.PeepholeOptimizer.classes import *
 
-#	dup
-#	pop
+#       dup
+#       pop
 # ->
 class MatchClass(Template):
     def __init__(self):
-	Template.__init__(self,
-			  [{"class" : Dup},
-			   {"class" : Pop},
-			   ]
-			  )
+        Template.__init__(self,
+                          [{"class" : Dup},
+                           {"class" : Pop},
+                           ]
+                          )
 
     def match(self, fn, items):
-	return True
+        return True
 
     def execute(self, fn, items):
-	items[0] = Nop()
-	items[1] = Nop()
-	return items
+        items[0] = Nop()
+        items[1] = Nop()
+        return items
 
 addTemplate(MatchClass())

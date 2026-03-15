@@ -41,7 +41,7 @@ def convertAddressToLine(address):
 
 def readMemory(address, length):
     if address & 3 != 0:
-        print "Unaligned reads in the text segment are unhandled"
+        print("Unaligned reads in the text segment are unhandled")
         return
     out = []
     for b in range(address, address + length):

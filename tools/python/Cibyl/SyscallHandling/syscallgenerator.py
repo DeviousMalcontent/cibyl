@@ -12,18 +12,18 @@
 import sys, re, os, tempfile, struct
 from Cibyl.BinaryTranslation.translator import Controller
 from Cibyl import config
-from function import *
+from .function import *
 
 def preprocess(defines, lines):
     s = ""
     for item in defines:
-	s = s + "%s " % item
+        s = s + "%s " % item
     # pipe cpp, -C menas keep comments, -P means emit no line information
     stdin, stdout = os.popen2("%s -C -P %s" % (config.cpp, s))
     if isinstance(lines, str):
-	stdin.write(lines)
+        stdin.write(lines)
     else: # List
-	stdin.writelines(lines)
+        stdin.writelines(lines)
     stdin.close()
     out = stdout.readlines()
     stdout.close()
@@ -31,13 +31,13 @@ def preprocess(defines, lines):
 
 def readFile(name):
     try:
-	f = open(name)
-	out = f.readlines()
-	f.close()
-	return out
+        f = open(name)
+        out = f.readlines()
+        f.close()
+        return out
     except:
-	# No such file
-	return []
+        # No such file
+        return []
 
 def readPreprocessedFile(name, defines):
     return preprocess(defines, readFile(name))
@@ -45,30 +45,30 @@ def readPreprocessedFile(name, defines):
 def fileExists(name):
     "Ugly hack warning"
     try:
-	os.stat(name)
-	return True
+        os.stat(name)
+        return True
     except:
-	return False
+        return False
 
 
 def generateSyscallSetDependencies(dirs, syscallSets):
     unresolved = []
     for syscallDir in syscallSets:
-	unresolved.append(syscallDir)
+        unresolved.append(syscallDir)
 
     while unresolved != []:
-	for syscallDir in unresolved:
-	    # Add dependencies to the sets
-	    for curDir in dirs:
-		for line in readFile(curDir + "/" + syscallDir + "/depends"):
-		    line = line.strip()
-		    if line in unresolved:
-			continue
-		    # Add this dependency
-		    unresolved.insert(0, line)
-		    syscallSets.insert(0, line)
-		if syscallDir in unresolved:
-		    unresolved.remove(syscallDir)
+        for syscallDir in unresolved:
+            # Add dependencies to the sets
+            for curDir in dirs:
+                for line in readFile(curDir + "/" + syscallDir + "/depends"):
+                    line = line.strip()
+                    if line in unresolved:
+                        continue
+                    # Add this dependency
+                    unresolved.insert(0, line)
+                    syscallSets.insert(0, line)
+                if syscallDir in unresolved:
+                    unresolved.remove(syscallDir)
 
     # Remove duplicates
     return set(syscallSets)
@@ -76,141 +76,141 @@ def generateSyscallSetDependencies(dirs, syscallSets):
 
 class SyscallFile:
     def __init__(self, filename):
-	self.filename = filename
-	self.all = []
-	self.functions = []
+        self.filename = filename
+        self.all = []
+        self.functions = []
 
 class SyscallGenerator:
     def __init__(self, dirs, syscallSets):
-	self.functions = []
-	self.files = []
-	self.dirs = dirs
-	self.syscallSets = generateSyscallSetDependencies(self.dirs, syscallSets)
+        self.functions = []
+        self.files = []
+        self.dirs = dirs
+        self.syscallSets = generateSyscallSetDependencies(self.dirs, syscallSets)
 
-	count = 0
-	for curDir in self.dirs:
-	    for syscallDir in self.syscallSets:
-		# Read all the functions for this syscall dir
-		for root, dirs, files in os.walk(curDir + "/" + syscallDir + "/include"):
-		    for cur in files:
-			if not cur.endswith(".h"):
-			    continue
-			pathToFile = os.path.join(root, cur)
-			relativePath = pathToFile.replace(curDir + "/" + syscallDir + "/include/", "")
-			curFile = SyscallFile(relativePath)
-			f = readFile(os.path.join(root, cur))
+        count = 0
+        for curDir in self.dirs:
+            for syscallDir in self.syscallSets:
+                # Read all the functions for this syscall dir
+                for root, dirs, files in os.walk(curDir + "/" + syscallDir + "/include"):
+                    for cur in files:
+                        if not cur.endswith(".h"):
+                            continue
+                        pathToFile = os.path.join(root, cur)
+                        relativePath = pathToFile.replace(curDir + "/" + syscallDir + "/include/", "")
+                        curFile = SyscallFile(relativePath)
+                        f = readFile(os.path.join(root, cur))
 
-			for line in f:
-			    match = fnRegexp.match(line)
-			    if match == None:
-				curFile.all.append(line.strip())
-				continue
-			    returnType = match.group(1)
-			    name = match.group(2).strip()
-			    arguments = match.group(3).split(",")
-			    qualifier = match.group(4)
+                        for line in f:
+                            match = fnRegexp.match(line)
+                            if match == None:
+                                curFile.all.append(line.strip())
+                                continue
+                            returnType = match.group(1)
+                            name = match.group(2).strip()
+                            arguments = match.group(3).split(",")
+                            qualifier = match.group(4)
 
-			    # Create a new function
-			    function = Function(count, syscallDir,
-						returnType, name, arguments, qualifier)
-			    count = count + 1
+                            # Create a new function
+                            function = Function(count, syscallDir,
+                                                returnType, name, arguments, qualifier)
+                            count = count + 1
 
-			    curFile.all.append(function)
-			    curFile.functions.append(function)
-			    self.functions.append(function)
-			self.files.append(curFile)
+                            curFile.all.append(function)
+                            curFile.functions.append(function)
+                            self.functions.append(function)
+                        self.files.append(curFile)
 
 
 class SyscallHeaderGenerator(SyscallGenerator):
     def __init__(self, dirname, syscallSets, outdir):
-	SyscallGenerator.__init__(self, [dirname], syscallSets)
-	self.outdir = outdir
+        SyscallGenerator.__init__(self, [dirname], syscallSets)
+        self.outdir = outdir
 
     def run(self):
-	for curFile in self.files:
-	    path = "%s/%s" % (self.outdir, curFile.filename)
-	    try:
-		os.makedirs(os.path.dirname(path))
-	    except:
-		pass # We do nothing - the path already exists
-	    outfile = open(path, "w")
-	    for item in curFile.all:
-		if not isinstance(item, Function):
-		    outfile.write("%s\n" % item)
-		    continue
-		outfile.write( "#define __NR_%s %d /* %s */\n" % (item.getName(), item.getNr(), item.getSyscallSet()) )
-		outfile.write( "static inline _syscall%d(%s,%s" % (item.getNrArgs(), item.getReturnType(), item.getName()) )
-		if item.getNrArgs() > 0:
-		    for arg in item.getArgs():
-			outfile.write(", %s" % arg)
-		outfile.write(") %s\n" % (item.getQualifier()) )
-	    outfile.close()
+        for curFile in self.files:
+            path = "%s/%s" % (self.outdir, curFile.filename)
+            try:
+                os.makedirs(os.path.dirname(path))
+            except:
+                pass # We do nothing - the path already exists
+            outfile = open(path, "w")
+            for item in curFile.all:
+                if not isinstance(item, Function):
+                    outfile.write("%s\n" % item)
+                    continue
+                outfile.write( "#define __NR_%s %d /* %s */\n" % (item.getName(), item.getNr(), item.getSyscallSet()) )
+                outfile.write( "static inline _syscall%d(%s,%s" % (item.getNrArgs(), item.getReturnType(), item.getName()) )
+                if item.getNrArgs() > 0:
+                    for arg in item.getArgs():
+                        outfile.write(", %s" % arg)
+                outfile.write(") %s\n" % (item.getQualifier()) )
+            outfile.close()
 
 
 class SyscallWrapperGenerator(SyscallGenerator):
     def __init__(self, program, syscallDirectories, dirs, syscallSets, outdir,
                  defines=[], packageName = None, generateAllSyscalls = False):
-	self.dirs = dirs
-	self.syscallSets = generateSyscallSetDependencies(self.dirs, syscallSets)
-	self.functions = functionsFromHeaderDirectories(syscallDirectories)
+        self.dirs = dirs
+        self.syscallSets = generateSyscallSetDependencies(self.dirs, syscallSets)
+        self.functions = functionsFromHeaderDirectories(syscallDirectories)
 
-	self.generateAllSyscalls = generateAllSyscalls
-	if generateAllSyscalls:
-	    self.controller = None
-	else:
-	    self.controller = Controller(program, syscallDirectories, onlyReadSyscalls=True)
-	self.outdir = outdir
-	self.outfile = open(outdir + "/Syscalls.java", "w")
-	self.defines = defines
+        self.generateAllSyscalls = generateAllSyscalls
+        if generateAllSyscalls:
+            self.controller = None
+        else:
+            self.controller = Controller(program, syscallDirectories, onlyReadSyscalls=True)
+        self.outdir = outdir
+        self.outfile = open(outdir + "/Syscalls.java", "w")
+        self.defines = defines
         self.packageName = packageName
 
     def run(self):
-	"""
-	Generate Java systemcall wrappers
-	"""
-	self.outfile.write("/* GENERATED, DON'T EDIT! */\n")
+        """
+        Generate Java systemcall wrappers
+        """
+        self.outfile.write("/* GENERATED, DON'T EDIT! */\n")
         if self.packageName != None:
             self.outfile.write("package %s;" % (self.packageName))
 
-	for curDir in self.dirs:
-	    for syscallDir in self.syscallSets:
-		# Add all the imports
-		for line in readPreprocessedFile(curDir + "/" + syscallDir + "/imports", self.defines):
-		    self.outfile.write("%s\n" % line.strip())
+        for curDir in self.dirs:
+            for syscallDir in self.syscallSets:
+                # Add all the imports
+                for line in readPreprocessedFile("/home/cibyl/mips-cibyl-elf/sys-root/usr/share/syscalls/java/imports", self.defines):
+                    self.outfile.write("%s\n" % line.strip())
 
-	self.outfile.write("public class Syscalls {\n")
+        self.outfile.write("public class Syscalls {\n")
 
-	for curDir in self.dirs:
-	    for syscallDir in self.syscallSets:
-		# And run the initialization
-		for line in readPreprocessedFile(curDir + "/" + syscallDir + "/init", self.defines):
-		    self.outfile.write("%s\n" % line.strip())
+        for curDir in self.dirs:
+            for syscallDir in self.syscallSets:
+                # And run the initialization
+                for line in readPreprocessedFile(curDir + "/" + syscallDir + "/init", self.defines):
+                    self.outfile.write("%s\n" % line.strip())
 
-	for curDir in self.dirs:
-	    lines = []
-	    for item in self.functions:
-		if (self.generateAllSyscalls or self.controller.usesSyscall(item.name)) and fileExists(curDir + "/" + item.getSyscallSet()):
-		    lines.append(item.generateJavaCall(curDir + "/" + item.getSyscallSet() ))
-	    self.outfile.writelines( preprocess(self.defines, lines) )
-	self.outfile.write("}\n")
+        for curDir in self.dirs:
+            lines = []
+            for item in self.functions:
+                if (self.generateAllSyscalls or self.controller.usesSyscall(item.name)) and fileExists(curDir + "/" + item.getSyscallSet()):
+                    lines.append(item.generateJavaCall(curDir + "/" + item.getSyscallSet() ))
+            self.outfile.writelines( preprocess(self.defines, lines) )
+        self.outfile.write("}\n")
 
-	for s in self.syscallSets:
-	    for curDir in self.dirs:
-		if not fileExists(curDir + "/" + s + "/classes"):
-		    continue
-		for f in os.listdir(curDir + "/" + s + "/classes"):
-		    if f.endswith(".java"):
-			data = readPreprocessedFile(curDir + "/" + s + "/classes/" + f, self.defines)
-			out = open("%s/%s" % (self.outdir, f), "w")
-			out.writelines(data)
-			out.close()
+        for s in self.syscallSets:
+            for curDir in self.dirs:
+                if not fileExists(curDir + "/" + s + "/classes"):
+                    continue
+                for f in os.listdir(curDir + "/" + s + "/classes"):
+                    if f.endswith(".java"):
+                        data = readPreprocessedFile(curDir + "/" + s + "/classes/" + f, self.defines)
+                        out = open("%s/%s" % (self.outdir, f), "w")
+                        out.writelines(data)
+                        out.close()
 
 
 
 class SyscallDatabaseGenerator(SyscallGenerator):
     def __init__(self, dirname, syscallSets, outfile):
-	SyscallGenerator.__init__(self, [dirname], syscallSets)
-	self.outfile = outfile
+        SyscallGenerator.__init__(self, [dirname], syscallSets)
+        self.outfile = outfile
 
     def encodeReturnType(self, item):
         if item.getJavaReturnType() == "void":
@@ -271,10 +271,10 @@ class SyscallDatabaseGenerator(SyscallGenerator):
 
         # Read all syscall directories
         of = open(self.outfile, "w")
-	for curFile in self.files:
-	    for item in curFile.all:
-		if not isinstance(item, Function):
-		    continue
+        for curFile in self.files:
+            for item in curFile.all:
+                if not isinstance(item, Function):
+                    continue
                 items.append(item)
 
         # Create the structure
@@ -298,34 +298,54 @@ class SyscallDatabaseGenerator(SyscallGenerator):
         strtab_offs = arg_offs + sz * len(args) * 4
 
         # Write the header
-        of.write(struct.pack("P", 0x11b1c1d1)) # magic
-        of.write(struct.pack("P", len(self.dirs))) # Nr syscall directories
-        of.write(struct.pack("P", len(self.syscallSets))) # Nr syscall sets
-        of.write(struct.pack("P", len(out)) )      # Nr items
-        of.write(struct.pack("P", arg_offs))
-        of.write(struct.pack("P", strtab_offs))
+        data = struct.pack("P", 0x11b1c1d1)
+        hex_str = data.hex()
+        of.write(hex_str)
+        data2 = struct.pack("P", len(self.dirs))
+        dir_str = data2.hex()
+        of.write(dir_str)
+        data3 = struct.pack("P", len(self.syscallSets))
+        syscall_str = data3.hex()
+        of.write(syscall_str)
+        data4 = struct.pack("P", len(out))
+        out_str = data3.hex()
+        of.write(out_str)
+        data4 = (struct.pack("P", arg_offs))
+        arg_offs_str = data4.hex()
+        of.write(arg_offs_str)
+        data4 = struct.pack("P", strtab_offs)
+        strtab_offs_str = data4.hex()
+        of.write(strtab_offs_str)
 
         # The path names, as strtab offsets
         for d in self.dirs:
             offs = self.add_str(os.path.abspath(d))
-            of.write(struct.pack("P", offs))
+        data5 = struct.pack("P", offs)
+        offs1_str = data5.hex()
+        of.write(offs1_str)
 
         # The syscall set names, as strtab offsets
         for s in self.syscallSets:
             offs = self.add_str(s)
-            of.write(struct.pack("P", offs))
+        data6 = struct.pack("P", offs)
+        offs2_str = data6.hex()
+        of.write(offs2_str)
 
         # Write the out structures
         arg_count = 0
         for s in out:
-            of.write(struct.pack("PPPPPPPPPPP",
+            data7 = struct.pack("PPPPPPPPPPP",
                                  s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8],
-                                 arg_count, 0)) # Last is for usage outside
+                                 arg_count, 0)
             arg_count = arg_count + sz * 4 * s[2]
+            ppp_str = data7.hex()
+            of.write(ppp_str)
 
         # Write the arguments
         for a in args:
-            of.write(struct.pack("PPPP", 0, a[0], a[1], a[2]))
+            data8 = struct.pack("PPPP", 0, a[0], a[1], a[2])
+            pppp_str = data8.hex()
+            of.write(pppp_str)
 
         # Write the string table
         for item in self.strs:

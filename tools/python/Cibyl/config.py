@@ -66,7 +66,7 @@ def getWtkPath():
     base = os.path.dirname(os.path.realpath(dn))
 
     if base == None:
-	base = "/usr/local/share/cibyl"
+        base = "/usr/local/share/cibyl"
     return base
 
 
@@ -75,7 +75,7 @@ def getBasePath():
     base = os.path.dirname(os.path.realpath(dn))
 
     if base == None:
-	base = "/usr/local/share/cibyl"
+        base = "/usr/local/share/cibyl"
     return base
 
 wtk = getWtkPath()
@@ -104,16 +104,16 @@ def checkOne(cmdline, fn, error_message):
     out = f.read()
     f.close()
     if fn(out) != True:
-        print "Failed environment check", cmdline
-        print
-        print error_message
-        print
+        print("Failed environment check", cmdline)
+        print()
+        print(error_message)
+        print()
         return 1
     return 0
 
 def abortWithMessage(msg):
-    print
-    print "Error:", msg
+    print()
+    print("Error:", msg)
     sys.exit(1)
 
 def checkEnvironment():
@@ -129,15 +129,15 @@ def checkEnvironment():
   CIBYL_OBJCOPY and CIBYL_CPP in env.sh""")
 
     if not os.path.isdir(outDirectory):
-        print "The destination " + outDirectory + " is not a directory"
+        print("The destination " + outDirectory + " is not a directory")
         nok |= 1
 
     if not os.path.isfile(infile):
-        print "The infile '" + infile + "' is not found (or is not a regular file)"
+        print("The infile '" + infile + "' is not found (or is not a regular file)")
         nok |= 1
 
     if profileFile and not os.path.isfile(profileFile):
-        print "The profile file '" + profileFile + "' is not found (or is not a regular file)"
+        print("The profile file '" + profileFile + "' is not found (or is not a regular file)")
         nok |= 1
 
     if nok:

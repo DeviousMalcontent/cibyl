@@ -9,8 +9,8 @@
 ## $Id:$
 ##
 ######################################################################
-import jdb, gdbmips
-from Queue import Queue, Empty
+from . import jdb, gdbmips
+from queue import Queue, Empty
 
 EMPTY=""
 
@@ -18,7 +18,7 @@ class PacketException(Exception):
     pass
 
 def unsigned(val):
-    return long(val) & 0xffffffffl
+    return int(val) & 0xffffffff
 
 def qPacket(s):
     if s == "C":
@@ -35,7 +35,7 @@ def pPacket(s):
     reg = int(s, 16)
     try:
         val = jdb.readRegister(reg)
-    except jdb.JdbException, inst:
+    except jdb.JdbException as inst:
         return "E00"
     return "%08x" % unsigned(val)
 
@@ -45,7 +45,7 @@ def PPacket(s):
     value = int(s[s.find("="):], 16)
     try:
         val = jdb.writeRegister(reg, value)
-    except jdb.JdbException, inst:
+    except jdb.JdbException as inst:
         return "E00"
     return "OK"
 
@@ -82,7 +82,7 @@ def mPacket(s):
             data = gdbmips.readMemory(addr, length)
         else:
             data = jdb.readMemory(addr, length)
-    except jdb.JdbException, inst:
+    except jdb.JdbException as inst:
         return "E00"
 
     out = ""
@@ -102,7 +102,7 @@ def MPacket(s):
             return "E00"
         else:
             data = jdb.writeMemory(addr, length, value)
-    except jdb.JdbException, inst:
+    except jdb.JdbException as inst:
         return "E00"
     return "OK"
 
@@ -119,7 +119,7 @@ def ZPacket(s):
 
     try:
         jdb.setBreakpoint( gdbmips.convertAddressToLine(addr) )
-    except jdb.JdbException, inst:
+    except jdb.JdbException as inst:
         return "E00"
     return "OK"
 
@@ -129,7 +129,7 @@ def zPacket(s):
 
     try:
         jdb.clearBreakpoint( gdbmips.convertAddressToLine(addr) )
-    except jdb.JdbException, inst:
+    except jdb.JdbException as inst:
         return "E00"
     return "OK"
 
@@ -144,7 +144,7 @@ def cPacket(s):
         addr = int(s,16)
     try:
         next_address = jdb.doContinue(addr)
-    except jdb.JdbException, inst:
+    except jdb.JdbException as inst:
         return "X00"
     return breakpointPackage()
 
@@ -181,7 +181,7 @@ def handle(s):
                  "?" : haltPacket,
                  }
 
-    if handlers.has_key(s[0]):
+    if s[0] in handlers:
         return handlers[s[0]](s[1:])
 
     return EMPTY
@@ -190,19 +190,18 @@ inputQueue = Queue(0)
 killed = False
 
 def enqueue(item):
-    print "enq", item
+    print("enq", item)
     inputQueue.put(item)
 
 def run(gdb):
-	while True:
-		try:
-			packet = inputQueue.get(timeout=1)
-		except Empty:
-			continue
-		response = handle(packet)
-		if response == None:
-			# Some error - return
-			gdb.nak()
-		else:
-			gdb.writePacket(response)
-
+    while True:
+        try:
+            packet = inputQueue.get(timeout=1)
+        except Empty:
+            continue
+        response = handle(packet)
+        if response == None:
+            # Some error - return
+            gdb.nak()
+        else:
+            gdb.writePacket(response)

@@ -10,7 +10,7 @@
 ##
 ######################################################################
 import re
-import gdbmips
+from . import gdbmips
 from Cibyl import config
 from Cibyl.BinaryTranslation.Mips import mips
 
@@ -31,7 +31,7 @@ def readRegister(reg):
         readState()
     if reg == 0:
         return 0
-    if gdbmips.registerNames.has_key(reg):
+    if reg in gdbmips.registerNames:
         return readStaticVariable("CRunTime.%s" % gdbmips.registerNames[reg])
     return regs[reg]
 
@@ -75,7 +75,7 @@ def readMemory(addr, length):
 
 def writeMemory(address, length, value):
     if length != 4:
-        print "Writing non-4-byte values not supported (%d bytes, address %x, val %s)" % (length, address, value)
+        print("Writing non-4-byte values not supported (%d bytes, address %x, val %s)" % (length, address, value))
         raise JdbException("Writing non-4-byte values not supported (%d bytes, address %x, val %s)" % (length, address, value))
 
     if address / 4 < 0 or address / 4 >= memoryArraySize:
@@ -146,7 +146,7 @@ def readState():
     for line in output.splitlines():
         if line.find(" = ") != -1:
             s = line.split()
-            if mips.namesToRegisters.has_key(s[0]):
+            if s[0] in mips.namesToRegisters:
                 regs[mips.namesToRegisters[s[0]]] = int(s[2])
 
     # Get the PC
@@ -180,7 +180,7 @@ def kickJdb():
     waitForPrompt()
 
 def sendCommand(s):
-    if config.verbose: print "->JDB:", s
+    if config.verbose: print("->JDB:", s)
     process.sendline(s)
 
 def waitForPrompt(prompt = "([a-z,A-Z,0-9,_])\[([0-9]+)\] $"):
@@ -188,7 +188,7 @@ def waitForPrompt(prompt = "([a-z,A-Z,0-9,_])\[([0-9]+)\] $"):
         try:
             process.expect(prompt, 2)
             for l in process.before.splitlines():
-                if config.verbose: print "<-JDB:", l
+                if config.verbose: print("<-JDB:", l)
             return process.before
         except:
             sendCommand("\n")
