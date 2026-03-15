@@ -216,6 +216,7 @@ jobs:
 
     - name: Build translator and the cibyl libraries
       run: |
+          pip install config
           cd /home/runner/work/cibyl/cibyl/
           cd build
           cmake ../
