@@ -1,6 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+SCRIPT=$(readlink -f "$0")
+P=$(dirname "$SCRIPT")
 
-P=`dirname $0`
+echo "cibyl-jasmin"
 
 if uname | grep -iq cygwin; then
   P=`cygpath -m $P`
