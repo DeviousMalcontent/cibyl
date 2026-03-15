@@ -36,6 +36,7 @@ jobs:
           wget https://github.com/DeviousMalcontent/cibyl/releases/download/v7/mips-cibyl-elf.tar.bz2
           tar -xjf mips-cibyl-elf.tar.bz2
           dir
+          sed -i '3s#.*#P=`pwd`#' /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin
           cd /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf
           dir
