@@ -37,6 +37,9 @@ jobs:
           tar -xjf mips-cibyl-elf.tar.bz2
           dir
           sed -i '3s#.*#P=`pwd`#' /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+          echo ---
+          cat /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+          echo ---
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin
           cd /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf
           dir
