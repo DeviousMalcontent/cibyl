@@ -11,7 +11,9 @@
 ######################################################################
 import re,os
 
-fnRegexp = re.compile("([A-Z,a-z,0-9,_,\\*]+) ([A-Z,a-z,0-9,_]+)\\(([A-Z,a-z,0-9,\\*,\,, ,_]*)\);[ ]*(\/\\*[A-Z,a-z, ]+\\*\/)*")
+#fnRegexp = re.compile("([A-Z,a-z,0-9,_,\\*]+) ([A-Z,a-z,0-9,_]+)\\(([A-Z,a-z,0-9,\\*,\\,, ,_]*)\\);[ ]*(\/\\*[A-Z,a-z, ]+\\*\/)*")
+fnRegexp = re.compile(r"([A-Z,a-z,0-9,_,\\*]+) ([A-Z,a-z,0-9,_]+)\(([A-Z,a-z,0-9,\\*,\,, ,_]*)\);[ ]*(\/\\*[A-Z,a-z, ]+\\*\/)*")
+#fnRegexp = re.compile(r"([A-Za-z0-9_*]+)\s+([A-Za-z0-9_]+)\(([A-Za-z0-9*, _]*)\);\s*(/\*[A-Za-z ]+\*/)*")
 javaTypeRegexp = re.compile("NOPH_([A-Z,a-z,0-9]+)_t")
 javaClassMethodRegexp = re.compile("NOPH_([A-Z,a-z,0-9]+)_([A-Z,a-z,0-9]+)_*([A-Z,a-z,0-9]+)*")
 
@@ -234,8 +236,8 @@ class Function:
 
 
 # Regexps are nice for things like this :-)
-syscallDefinitionRegexp = re.compile("[ \t]*static inline _syscall([0-9]+)\\(([A-Z,a-z,0-9,_,\*]+)[ \t\,]*,([A-Z,a-z,0-9,_]+)[ \t]*([A-Z,a-z,0-9,\*,\,, ,_]*)\) (\/\*[ ]+[A-Z,a-z,_,0-9, ]+[ ]+\*\/)*")
-nrRegexp = re.compile("#define __NR_([a-z,A-Z,0-9,_]+) ([0-9]+) \\/\*[ ]+([A-Z,a-z, ,_,0-9,.,-]+)[ ]+\*\\/*")
+syscallDefinitionRegexp = re.compile(r"[ \t]*static inline _syscall([0-9]+)\\(([A-Z,a-z,0-9,_,\*]+)[ \t\,]*,([A-Z,a-z,0-9,_]+)[ \t]*([A-Z,a-z,0-9,\*,\,, ,_]*)\) (\/\*[ ]+[A-Z,a-z,_,0-9, ]+[ ]+\*\/)*")
+nrRegexp = re.compile(r"#define __NR_([a-z,A-Z,0-9,_]+) ([0-9]+) \\/\*[ ]+([A-Z,a-z, ,_,0-9,.,-]+)[ ]+\*\\/*")
 def functionsFromHeaderDir(dirname):
     "Open the numbers file and read the system call numbers"
     out = []

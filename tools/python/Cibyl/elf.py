@@ -14,11 +14,11 @@ import tempfile, config
 
 # From Dissy
 ADR  = "[0-9,a-f,A-F]+"
-FN = "(?:[.]*)[_,0-9,a-z,A-Z,\:,\*,\,\(,\), ,<,>]+"
+FN = "r(?:[.]*)[_,0-9,a-z,A-Z,\\:,\\*,\\,\\(,\\), ,<,>]+"
 
 symbolRegexp = re.compile("(" + ADR + ")* *(" + ADR + ")* ([A,B,C,D,G,I,N,R,S,T,U,V,W,a,b,c,d,g,i,n,r,s,t,u,v,w,-,?]{1}) ("+ FN + "){1}")
-sectionRegexp = re.compile("[ \t]*\[([ ,0-9]+)\]+[ ,\t]+([A-Z,a-z,0-9,_,\.]+)[ ,\t]+([A-Z,_,\.]+)[ ,\t]+("+ADR+")[ ,\t]+("+ADR+")[ ,\t]+("+ADR+")")
-relocationSectionRegexp = re.compile("Relocation section '.rel([\.,A-Z,a-z,0-9,_]+)' at offset")
+sectionRegexp = re.compile(r"[ \t]*\[([ ,0-9]+)\]+[ ,\t]+([A-Z,a-z,0-9,_,\.]+)[ ,\t]+([A-Z,_,\.]+)[ ,\t]+("+ADR+")[ ,\t]+("+ADR+")[ ,\t]+("+ADR+")")
+relocationSectionRegexp = re.compile(r"Relocation section '.rel([\.,A-Z,a-z,0-9,_]+)' at offset")
 relocationRegexp = re.compile("(" + ADR + ")[ \t]+(?:" + ADR + ")[ \t]+([a-z,A-Z,0-9_]+)[ \t]+(" + ADR + ")[ \t]+(" + FN + ")")
 
 class Symbol:
