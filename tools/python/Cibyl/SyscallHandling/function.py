@@ -236,7 +236,8 @@ class Function:
 
 
 # Regexps are nice for things like this :-)
-syscallDefinitionRegexp = re.compile("[ \t]*static inline _syscall([0-9]+)\\(([A-Z,a-z,0-9,_,\*]+)[ \t\,]*,([A-Z,a-z,0-9,_]+)[ \t]*([A-Z,a-z,0-9,\*,\,, ,_]*)\) (\/\*[ ]+[A-Z,a-z,_,0-9, ]+[ ]+\*\/)*")
+#syscallDefinitionRegexp = re.compile("[ \t]*static inline _syscall([0-9]+)\\(([A-Z,a-z,0-9,_,\*]+)[ \t\,]*,([A-Z,a-z,0-9,_]+)[ \t]*([A-Z,a-z,0-9,\*,\,, ,_]*)\) (\/\*[ ]+[A-Z,a-z,_,0-9, ]+[ ]+\*\/)*")
+syscallDefinitionRegexp = re.compile(r"[ \t]*static inline _syscall([0-9]+)\(([A-Za-z0-9_*]+)[ \t,]*,([A-Za-z0-9_]+)[ \t]*([A-Za-z0-9*, _]*)\)(/\*[ A-Za-z0-9_ ]+\*/)*")
 nrRegexp = re.compile(r"#define __NR_([a-z,A-Z,0-9,_]+) ([0-9]+) \\/\*[ ]+([A-Z,a-z, ,_,0-9,.,-]+)[ ]+\*\\/*")
 def functionsFromHeaderDir(dirname):
     "Open the numbers file and read the system call numbers"
