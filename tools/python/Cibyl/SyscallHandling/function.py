@@ -11,7 +11,7 @@
 ######################################################################
 import re,os
 
-fnRegexp = re.compile("([A-Z,a-z,0-9,_,\\*]+) ([A-Z,a-z,0-9,_]+)\(([A-Z,a-z,0-9,\\*,\,, ,_]*)\);[ ]*(\/\\*[A-Z,a-z, ]+\\*\/)*")
+fnRegexp = re.compile("([A-Z,a-z,0-9,_,\\*]+) ([A-Z,a-z,0-9,_]+)\\(([A-Z,a-z,0-9,\\*,\,, ,_]*)\);[ ]*(\/\\*[A-Z,a-z, ]+\\*\/)*")
 javaTypeRegexp = re.compile("NOPH_([A-Z,a-z,0-9]+)_t")
 javaClassMethodRegexp = re.compile("NOPH_([A-Z,a-z,0-9]+)_([A-Z,a-z,0-9]+)_*([A-Z,a-z,0-9]+)*")
 
