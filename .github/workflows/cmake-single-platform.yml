@@ -27,6 +27,8 @@ jobs:
 
           cd toolchain
           make #
+          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
+          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
           pwd
           dir
 
@@ -36,7 +38,6 @@ jobs:
           cd /home/runner/work/cibyl/cibyl/
           pwd
           dir
-
           cd build
           cmake ../
           make && make install
@@ -45,8 +46,8 @@ jobs:
           dir
           echo -- done! --
 
-#          export PATH=$PATH:/home/runner/work/cibyl/cibyl/build/mips-cibyl-elf/bin
-#          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/build/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+#          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
+#          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          which mips-cibyl-elf-gcc
 
     - name: Upload Builds
