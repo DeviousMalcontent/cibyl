@@ -36,8 +36,8 @@ jobs:
           cd /home/runner/work/cibyl/cibyl/
           pwd
           dir
-          export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin  
-          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+          export PATH=$PATH:/home/runner/work/cibyl/cibyl/build/mips-cibyl-elf/bin
+          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/build/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
           which mips-cibyl-elf-gcc
           cd build
           cmake ../
