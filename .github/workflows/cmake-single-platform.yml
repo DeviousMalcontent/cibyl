@@ -29,14 +29,16 @@ jobs:
           make #
           pwd
           dir
-          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin  
-          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
-          which mips-cibyl-elf-gcc
 
     - name: Build translator and the cibyl libraries
       run: |
           pip install config
           cd /home/runner/work/cibyl/cibyl/
+          pwd
+          dir
+          export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin  
+          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+          which mips-cibyl-elf-gcc
           cd build
           cmake ../
           make && make install
