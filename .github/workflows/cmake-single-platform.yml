@@ -27,11 +27,10 @@ jobs:
 
           cd toolchain
           make #
-          export PATH=$PATH:/home/runner/work/cibyl/cibyl/mips-cibyl-elf/bin
+          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin
 
     - name: Setup environment
       run: |
-          cd toolchain
           pwd
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin
           cd /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf
