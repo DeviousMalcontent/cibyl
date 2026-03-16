@@ -36,9 +36,7 @@ jobs:
           cd /home/runner/work/cibyl/cibyl/
           pwd
           dir
-          export PATH=$PATH:/home/runner/work/cibyl/cibyl/build/mips-cibyl-elf/bin
-          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/build/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
-          which mips-cibyl-elf-gcc
+
           cd build
           cmake ../
           make && make install
@@ -46,6 +44,10 @@ jobs:
           pwd
           dir
           echo -- done! --
+
+#          export PATH=$PATH:/home/runner/work/cibyl/cibyl/build/mips-cibyl-elf/bin
+#          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/build/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+#          which mips-cibyl-elf-gcc
 
     - name: Upload Builds
       uses: actions/upload-artifact@v4
