@@ -34,6 +34,9 @@ jobs:
 
     - name: Build translator and the cibyl libraries
       run: |
+          echo -- tree 1
+          tree -d /home/runner/work/cibyl/cibyl/
+          echo -- tree 1
           pip install config
           cd /home/runner/work/cibyl/cibyl/
           pwd
@@ -41,6 +44,9 @@ jobs:
           cd build
           cmake ../
           make && make install
+          echo -- tree 2
+          tree -d /home/runner/work/cibyl/cibyl/
+          echo -- tree 2
           echo -- here --
           pwd
           dir
