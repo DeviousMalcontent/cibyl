@@ -18,7 +18,8 @@ endif(NOT CMAKE_BUILD_TYPE)
 # Lookup where the compiler is located
 
 # #execute_process(COMMAND which mips-cibyl-elf-gcc
-execute_process(COMMAND echo /home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+# #execute_process(COMMAND echo /home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin/mips-cibyl-elf-gcc
+execute_process(COMMAND echo /home/runner/work/cibyl/cibyl/build/fake_bin/mips-cibyl-elf-gcc
   OUTPUT_VARIABLE MIPS_CIBYL_GCC_BINARY
   RESULT_VARIABLE which_RES)
 
