@@ -35,7 +35,6 @@ jobs:
 
     - name: Build translator and the cibyl libraries
       run: |
-          pip install config
           cd /home/runner/work/cibyl/cibyl/
           pwd
           dir
@@ -48,7 +47,7 @@ jobs:
           echo -- done! --
           cat CMakeFiles\CMakeOutput.log
           echo -- end --
-
+#          pip install config
 #          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          which mips-cibyl-elf-gcc
