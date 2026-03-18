@@ -27,8 +27,8 @@ jobs:
 
           cd toolchain
           make #
-          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
-          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
+          export PATH=$PATH:/home/runner/work/cibyl/cibyl/build/fake_bin/mips-cibyl-elf-gcc
+          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/build/fake_bin/mips-cibyl-elf-gcc
           pwd
           dir
 
@@ -41,9 +41,6 @@ jobs:
           cd build
           cmake ../
           make && make install
-          echo -- tree
-          tree /home/runner/work/cibyl/cibyl/
-          echo -- tree
           echo -- here --
           pwd
           dir
