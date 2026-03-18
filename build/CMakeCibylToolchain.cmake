@@ -3,10 +3,14 @@ set(CMAKE_SYSTEM_NAME Cibyl)
 #this one not so much
 set(CMAKE_SYSTEM_VERSION 1)
 
+message("*** test! \n")
+
 # specify the cross compiler
 set(CMAKE_ASM_COMPILER  mips-cibyl-elf-gcc)
 set(CMAKE_C_COMPILER   mips-cibyl-elf-gcc)
 set(CMAKE_CXX_COMPILER mips-cibyl-elf-g++)
+
+message("*** test 2! \n")
 
 # search for programs in the build host directories
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
