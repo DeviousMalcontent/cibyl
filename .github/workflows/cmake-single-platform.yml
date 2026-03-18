@@ -28,7 +28,7 @@ jobs:
           cd toolchain
           make #
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
-
+          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
           cp -R -n /home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/* /home/runner/work/cibyl/cibyl/build/
           pwd
           dir
@@ -40,12 +40,14 @@ jobs:
           pwd
           dir
           cd build
-          cmake ../
+          cmake ../ --debug-output
           make && make install
           echo -- here --
           pwd
           dir
           echo -- done! --
+          cat CMakeFiles\CMakeOutput.log
+          echo -- end --
 
 #          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
