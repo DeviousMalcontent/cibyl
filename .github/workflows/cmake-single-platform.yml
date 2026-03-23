@@ -22,6 +22,9 @@ jobs:
     - name: Build Compiler
       run: |
           echo "test!" >> myfile.txt
+
+          git config --global user.email "deviousmalcontent@gmail.com"
+          git config --global user.name "DeviousMalcontent"
           
           git add /home/runner/work/cibyl/cibyl/*
           git commit -m "test upload before build"
