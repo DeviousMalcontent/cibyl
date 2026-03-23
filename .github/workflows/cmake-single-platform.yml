@@ -42,6 +42,7 @@ jobs:
           cmake ../
           echo -- Seeing this line means the issue may not be cmake --
           cd /home/runner/work/cibyl/cibyl/
+          cd toolchain
           make && make install
           echo -- here --
           pwd
