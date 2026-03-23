@@ -47,7 +47,6 @@ jobs:
           pwd
           dir
           echo -- done! --
-          cat CMakeFiles\CMakeOutput.log
           echo -- end --
 #          pip install config
 #          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
