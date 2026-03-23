@@ -21,6 +21,12 @@ jobs:
 
     - name: Build Compiler
       run: |
+          echo "test!" >> myfile.txt
+          
+          git add /home/runner/work/cibyl/cibyl/*
+          git commit -m "test upload before build"
+          git push --set-upstream origin test
+
           sudo apt-get install help2man
           sudo apt-get install libtool-bin
           sudo apt-get install libelf-dev
@@ -43,11 +49,16 @@ jobs:
           echo -- Seeing this line means the issue may not be cmake --
           cd /home/runner/work/cibyl/cibyl/
           cd toolchain
-          make && make install
-          echo -- here --
-          pwd
-          dir
-          echo -- done! --
+
+          git add /home/runner/work/cibyl/cibyl/*
+          git commit -m "test upload after build"
+          git push --set-upstream origin test
+          
+#          make && make install
+#          echo -- here --
+#          pwd
+#          dir
+#          echo -- done! --
 #          pip install config
 #          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
