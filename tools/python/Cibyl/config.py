@@ -75,7 +75,7 @@ def getBasePath():
     base = os.path.dirname(os.path.realpath(dn))
 
     if base == None:
-        base = "/home/runner/work/cibyl/cibyl"
+        base = "/usr/local/share/cibyl"
     return base
 
 wtk = getWtkPath()

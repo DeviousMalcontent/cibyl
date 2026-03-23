@@ -40,6 +40,8 @@ jobs:
           dir
           cd build
           cmake ../ --debug-output
+          echo -- Seeing this line means the issue may not be cmake --
+          cd /home/runner/work/cibyl/cibyl/
           make && make install
           echo -- here --
           pwd
