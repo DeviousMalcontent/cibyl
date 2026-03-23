@@ -39,7 +39,7 @@ jobs:
           pwd
           dir
           cd build
-          cmake ../ --debug-output
+          cmake ../
           echo -- Seeing this line means the issue may not be cmake --
           cd /home/runner/work/cibyl/cibyl/
           make && make install
@@ -47,7 +47,6 @@ jobs:
           pwd
           dir
           echo -- done! --
-          echo -- end --
 #          pip install config
 #          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
