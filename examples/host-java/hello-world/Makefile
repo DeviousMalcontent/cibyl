@@ -3,7 +3,7 @@
 all: program.jar
 
 program: main.c
-	mips-cibyl-elf-gcc -Os -o $@ $<
+	./mips-cibyl-elf-gcc -Os -o $@ $<
 
 tmpclasses/Cibyl.j: program
 	cibyl-mips2java -O -d tmpclasses -DNOJ2ME program
