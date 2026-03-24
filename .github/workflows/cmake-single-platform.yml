@@ -28,7 +28,7 @@ jobs:
           git config --global user.name "DeviousMalcontent"
 
           git fetch origin test
-          git add /home/runner/work/cibyl/cibyl/*
+          git add *
           git commit -m "test upload before build"
           git branch -a
           git switch -c test origin/test
@@ -57,7 +57,8 @@ jobs:
           cd /home/runner/work/cibyl/cibyl/
           cd toolchain
 
-          git add /home/runner/work/cibyl/cibyl/*
+          cd /home/runner/work/cibyl/cibyl/
+          git add *
           git commit -m "test upload after build"
           git push --set-upstream origin test
           
