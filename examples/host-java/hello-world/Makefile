@@ -3,7 +3,7 @@
 all: program.jar
 
 program: main.c
-	./home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin/mips-cibyl-elf-gcc -Os -o $@ $<
+	./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc -Os -o $@ $<
 
 tmpclasses/Cibyl.j: program
 	cibyl-mips2java -O -d tmpclasses -DNOJ2ME program
