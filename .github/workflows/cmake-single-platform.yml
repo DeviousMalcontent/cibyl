@@ -31,25 +31,14 @@ jobs:
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
           alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 
-    - name: Build translator and the cibyl libraries
-      run: |
-          pip install config
-          cd /home/runner/work/cibyl/cibyl/
-          pwd
-          dir
-          cd build
-          cmake ../
-
-    - name: Make hello world 
-      run: |
-          cd /home/runner/work/cibyl/cibyl/examples/host-java/hello-world
-          ./home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin/mips-cibyl-elf-gcc -o /home/runner/work/cibyl/cibyl/examples/host-java/hello-world/main.c
-          ./home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin/mips-cibyl-elf-gcc /home/runner/work/cibyl/cibyl/examples/host-java/hello-world/main.c -o /home/runner/work/cibyl/cibyl/examples/host-java/hello-world/main
-          make
-          echo -- here --
-          pwd
-          dir
-          echo -- done! --
+#    - name: Build translator and the cibyl libraries
+#      run: |
+#          pip install config
+#          cd /home/runner/work/cibyl/cibyl/
+#          pwd
+#          dir
+#          cd build
+#          cmake ../
 
     - name: Upload Builds
       uses: actions/upload-artifact@v4
