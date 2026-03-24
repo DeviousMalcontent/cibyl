@@ -25,10 +25,6 @@ toolchain_build: ct-ng.config crosstool_install
 	install -d $@
 	cp ct-ng.config $@/.config
 	cd $@ && ../crosstool_install/bin/ct-ng upgradeconfig && ../crosstool_install/bin/ct-ng build
-	# This is slow AS FUCK
-	# How did yall have time for rebuilding this in... ...whatever year it was before google code? On hardware that was probably much older?
-	# Might be a personal issue not gonna lie, maybe I should try Gentoo just for the patience. I've heard that it severely decreases fertility rates, however.
-	# - some newgen skid, 2025
 
 do_chmod: toolchain_build
 	chmod -R u+rw ${TGT}
@@ -46,11 +42,25 @@ jasmin-2.4.zip:
 jasmin-2.4: jasmin-2.4.zip
 	unzip $<
 
+translator:
+	cd ${TGT}/build
+	cmake ../
+
 install_replacements: clean_install jasmin-2.4
 	mv ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/ld ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/ld.real
 	mv ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-gcc ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-gcc.real
 	mv ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-g++ ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-g++.real
 	mv ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-ld ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-ld.real
+	mv ${TGT}/tools/python/ ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/python/
+	mv ${TGT}/tools/cibyl-config ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-config
+	mv ${TGT}/tools/xcibyl-translator ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/xcibyl-translator
+	mv ${TGT}/tools/cibyl-gdbserver ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-gdbserver
+	mv ${TGT}/tools/cibyl-generate-c-header ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-c-header
+	mv ${TGT}/tools/cibyl-generate-cibar ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-cibar
+	mv ${TGT}/tools/cibyl-generate-java-wrappers ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-java-wrappers
+	mv ${TGT}/tools/cibyl-generate-syscall-db ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-syscall-db
+	mv ${TGT}/tools/cibyl-mips2java ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-mips2java
+	mv ${TGT}/tools/cibyl-peephole-optimize ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-peephole-optimize
 	install ld ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/
 	install mips-cibyl-elf-gcc ${TGT}/mips-cibyl-elf/bin/
 	install mips-cibyl-elf-g++ ${TGT}/mips-cibyl-elf/bin/
