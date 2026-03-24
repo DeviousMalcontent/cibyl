@@ -21,6 +21,7 @@ jobs:
 
     - name: Build Compiler
       run: |
+          cd /home/runner/work/cibyl/cibyl/
           echo "test!" >> myfile.txt
 
           git config --global user.email "deviousmalcontent@gmail.com"
