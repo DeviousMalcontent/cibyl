@@ -24,6 +24,7 @@ jobs:
           sudo apt-get install help2man
           sudo apt-get install libtool-bin
           sudo apt-get install libelf-dev
+          pip install config
 
           cd toolchain
           make #
