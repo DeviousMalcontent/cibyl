@@ -42,7 +42,9 @@ jobs:
     - name: Make hello world 
       run: |
           cd /home/runner/work/cibyl/cibyl/examples/host-java/hello-world
-          ./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc.real -Os -o /home/runner/work/cibyl/cibyl/examples/host-java/hello-world/main.c
+          ./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc -Os -o /home/runner/work/cibyl/cibyl/examples/host-java/hello-world/main.c
+          ./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc -o /home/runner/work/cibyl/cibyl/examples/host-java/hello-world/main.c
+          ./home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf/bin/mips-cibyl-elf-gcc /home/runner/work/cibyl/cibyl/examples/host-java/hello-world/main.c -o /home/runner/work/cibyl/cibyl/examples/host-java/hello-world/main
           make
           echo -- here --
           pwd
