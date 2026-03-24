@@ -30,7 +30,8 @@ jobs:
           git add /home/runner/work/cibyl/cibyl/*
           git commit -m "test upload before build"
           git branch -a
-          git push --set-upstream origin test
+          git switch -c test origin/test
+          git push --set-upstream origin/test
 
           sudo apt-get install help2man
           sudo apt-get install libtool-bin
