@@ -21,19 +21,6 @@ jobs:
 
     - name: Build Compiler
       run: |
-          cd /home/runner/work/cibyl/cibyl/
-
-          git config --global user.email "deviousmalcontent@gmail.com"
-          git config --global user.name "DeviousMalcontent"
-
-          git fetch origin test
-          echo "test!" >> myfile.txt
-          git add *
-          git commit -m "test upload before build"
-          git branch -a
-          git switch -c test origin/test
-          git push --set-upstream origin test
-
           sudo apt-get install help2man
           sudo apt-get install libtool-bin
           sudo apt-get install libelf-dev
@@ -42,8 +29,6 @@ jobs:
           make #
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
           alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
-          pwd
-          dir
 
     - name: Build translator and the cibyl libraries
       run: |
@@ -53,24 +38,15 @@ jobs:
           dir
           cd build
           cmake ../
-          echo -- Seeing this line means the issue may not be cmake --
-          cd /home/runner/work/cibyl/cibyl/
-          cd toolchain
 
-          cd /home/runner/work/cibyl/cibyl/
-          git add *
-          git commit -m "test upload after build"
-          git push --set-upstream origin test
-          
-#          make && make install
-#          echo -- here --
-#          pwd
-#          dir
-#          echo -- done! --
-#          pip install config
-#          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
-#          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
-#          which mips-cibyl-elf-gcc
+    - name: Make hello world 
+      run: |
+          cd /home/runner/work/cibyl/cibyl/examples/host-java/hello-world
+          make
+          echo -- here --
+          pwd
+          dir
+          echo -- done! --
 
     - name: Upload Builds
       uses: actions/upload-artifact@v4
