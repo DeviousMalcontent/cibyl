@@ -53,7 +53,7 @@ install_replacements: clean_install jasmin-2.4 translator
 	mv ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-ld ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-ld.real
 	mv ../tools/python/ ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/python/
 	mv ../tools/cibyl-config ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-config
-	mv ../tools/xcibyl-translator ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/xcibyl-translator
+	mv ../tools/translator/xcibyl-translator ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/xcibyl-translator
 	mv ../tools/cibyl-gdbserver ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-gdbserver
 	mv ../tools/cibyl-generate-c-header ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-c-header
 	mv ../tools/cibyl-generate-cibar ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-cibar
