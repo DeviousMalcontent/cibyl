@@ -21,6 +21,8 @@ jobs:
 
     - name: Build Compiler
       run: |
+          sudo updatedb
+          sudo find / -type d -name "xcibyl-translator"
           sudo apt-get install help2man
           sudo apt-get install libtool-bin
           sudo apt-get install libelf-dev
