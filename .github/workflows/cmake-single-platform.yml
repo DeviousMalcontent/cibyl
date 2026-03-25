@@ -32,6 +32,10 @@ jobs:
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
           alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
           sudo find / -type d -name "xcibyl-translator"
+          echo -- tree --
+          tree -d /home/runner/work/cibyl/
+          echo -- tree --
+          
 
 #    - name: Build translator and the cibyl libraries
 #      run: |
