@@ -21,8 +21,6 @@ jobs:
 
     - name: Build Compiler
       run: |
-          sudo updatedb
-          sudo find / -type d -name "xcibyl-translator"
           sudo apt-get install help2man
           sudo apt-get install libtool-bin
           sudo apt-get install libelf-dev
@@ -32,6 +30,8 @@ jobs:
           make #
           export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
           alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
+          sudo updatedb
+          sudo find / -type d -name "xcibyl-translator"
 
 #    - name: Build translator and the cibyl libraries
 #      run: |
