@@ -53,7 +53,6 @@ install_replacements: clean_install jasmin-2.4 translator
 	mv ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-ld ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-ld.real
 	mv ../tools/python/ ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/python/
 	mv ../tools/cibyl-config ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-config
-	mv ../toolchain/xcibyl-translator ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/xcibyl-translator
 	mv ../tools/cibyl-gdbserver ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-gdbserver
 	mv ../tools/cibyl-generate-c-header ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-c-header
 	mv ../tools/cibyl-generate-cibar ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-cibar
@@ -67,6 +66,8 @@ install_replacements: clean_install jasmin-2.4 translator
 	install mips-cibyl-elf-ld ${TGT}/mips-cibyl-elf/bin/
 	install cibyl-jasmin ${TGT}/mips-cibyl-elf/bin/
 	install jasmin-2.4/jasmin.jar ${TGT}/mips-cibyl-elf/lib
+
+#	mv ../toolchain/xcibyl-translator ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/xcibyl-translator
 
 make_tarball: install_replacements
 	cd ${TGT} && tar -cjf ../mips-cibyl-elf.tar.bz2 mips-cibyl-elf
