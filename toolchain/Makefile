@@ -51,15 +51,16 @@ install_replacements: clean_install jasmin-2.4 translator
 	mv ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-gcc ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-gcc.real
 	mv ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-g++ ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-g++.real
 	mv ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-ld ${TGT}/mips-cibyl-elf/bin/mips-cibyl-elf-ld.real
-	mv ../tools/python/ ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/python/
-	mv ../tools/cibyl-config ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-config
-	mv ../tools/cibyl-gdbserver ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-gdbserver
-	mv ../tools/cibyl-generate-c-header ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-c-header
-	mv ../tools/cibyl-generate-cibar ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-cibar
-	mv ../tools/cibyl-generate-java-wrappers ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-java-wrappers
-	mv ../tools/cibyl-generate-syscall-db ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-generate-syscall-db
-	mv ../tools/cibyl-mips2java ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-mips2java
-	mv ../tools/cibyl-peephole-optimize ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/cibyl-peephole-optimize
+	mv ../tools/python/ ${TGT}/mips-cibyl-elf/bin/python/
+	mv ../tools/translator/ ${TGT}/mips-cibyl-elf/bin/translator/
+	mv ../tools/cibyl-config ${TGT}/mips-cibyl-elf/bin/cibyl-config
+	mv ../tools/cibyl-gdbserver ${TGT}/mips-cibyl-elf/bin/cibyl-gdbserver
+	mv ../tools/cibyl-generate-c-header ${TGT}/mips-cibyl-elf/bin/cibyl-generate-c-header
+	mv ../tools/cibyl-generate-cibar ${TGT}/mips-cibyl-elf/bin/cibyl-generate-cibar
+	mv ../tools/cibyl-generate-java-wrappers ${TGT}/mips-cibyl-elf/bin/cibyl-generate-java-wrappers
+	mv ../tools/cibyl-generate-syscall-db ${TGT}/mips-cibyl-elf/bin/cibyl-generate-syscall-db
+	mv ../tools/cibyl-mips2java ${TGT}/mips-cibyl-elf/bin/cibyl-mips2java
+	mv ../tools/cibyl-peephole-optimize ${TGT}/mips-cibyl-elf/bin/cibyl-peephole-optimize
 	install ld ${TGT}/mips-cibyl-elf/mips-cibyl-elf/bin/
 	install mips-cibyl-elf-gcc ${TGT}/mips-cibyl-elf/bin/
 	install mips-cibyl-elf-g++ ${TGT}/mips-cibyl-elf/bin/
