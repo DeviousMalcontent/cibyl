@@ -21,11 +21,21 @@ jobs:
 
     - name: Build Compiler
       run: |
-          sudo find / -type d -name "xcibyl-translator"
           sudo apt-get install help2man
           sudo apt-get install libtool-bin
           sudo apt-get install libelf-dev
           pip install config
+
+
+          pwd
+          dir
+          cd tools/translator/
+          cmake
+          cd /home/runner/work/cibyl/cibyl/
+
+          echo -- tree --
+          tree /home/runner/work/cibyl/
+          echo -- tree --
 
           cd toolchain
           make #
