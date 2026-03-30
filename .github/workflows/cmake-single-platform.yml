@@ -32,7 +32,7 @@ jobs:
           cmake tools/translator/
 
           echo -- tree --
-          tree /home/runner/work/cibyl/tools/translator/
+          tree /home/runner/work/cibyl/cibyl/tools/translator/
           echo -- tree --
 
 #          cd toolchain
