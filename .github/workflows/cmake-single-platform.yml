@@ -30,6 +30,7 @@ jobs:
           pwd
           dir
           cmake tools/translator/
+          make
 
           echo -- tree --
           tree /home/runner/work/cibyl/
