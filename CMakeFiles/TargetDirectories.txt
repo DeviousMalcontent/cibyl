@@ -1,0 +1,3 @@
+/mnt/c/Users/Mark/Documents/GitHub/cibyl/CMakeFiles/xcibyl-translator.dir
+/mnt/c/Users/Mark/Documents/GitHub/cibyl/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Mark/Documents/GitHub/cibyl/CMakeFiles/rebuild_cache.dir
