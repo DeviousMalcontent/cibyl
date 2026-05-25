@@ -26,23 +26,22 @@ jobs:
           sudo apt-get install libtool-bin
           sudo apt-get install libelf-dev
           pip install config
-
-
-          pwd
-          dir
+          
+          echo -- Build the translator --
           cmake tools/translator/
           make
           cd /home/runner/work/cibyl/cibyl/
           dir
-          echo -- end. --
-#          sudo find / -type d -name "xcibyl-translator"          
+          echo -- Build the Compiler --
+          cd toolchain
+          make #
+          echo -- Build the cibyl libraries --
+          cd /home/runner/work/cibyl/cibyl/
+          dir
+          cd build
+          cmake ../
 
-#          echo -- tree --
-#          tree /home/runner/work/cibyl/
-#          echo -- tree --
 
-#          cd toolchain
-#          make #
 #          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          sudo find / -type d -name "xcibyl-translator"
@@ -50,6 +49,11 @@ jobs:
 #          tree /home/runner/work/cibyl/
 #          echo -- tree --
           
+#          sudo find / -type d -name "xcibyl-translator"          
+
+#          echo -- tree --
+#          tree /home/runner/work/cibyl/
+#          echo -- tree --
 
 #    - name: Build translator and the cibyl libraries
 #      run: |
