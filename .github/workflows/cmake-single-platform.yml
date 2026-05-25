@@ -32,29 +32,33 @@ jobs:
           dir
           cmake tools/translator/
           make
+          cd /home/runner/work/cibyl/cibyl/
+          dir
+          echo -- end. --
+#          sudo find / -type d -name "xcibyl-translator"          
 
-          echo -- tree --
-          tree /home/runner/work/cibyl/
-          echo -- tree --
+#          echo -- tree --
+#          tree /home/runner/work/cibyl/
+#          echo -- tree --
 
-          cd toolchain
-          make #
-          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
-          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
+#          cd toolchain
+#          make #
+#          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
+#          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          sudo find / -type d -name "xcibyl-translator"
 #          echo -- tree --
 #          tree /home/runner/work/cibyl/
 #          echo -- tree --
           
 
-    - name: Build translator and the cibyl libraries
-      run: |
-          pip install config
-          cd /home/runner/work/cibyl/cibyl/
-          pwd
-          dir
-          cd build
-          cmake ../
+#    - name: Build translator and the cibyl libraries
+#      run: |
+#          pip install config
+#          cd /home/runner/work/cibyl/cibyl/
+#          pwd
+#          dir
+#          cd build
+#          cmake ../
 
     - name: Upload Builds
       uses: actions/upload-artifact@v4
