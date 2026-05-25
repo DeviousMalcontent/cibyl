@@ -32,6 +32,7 @@ jobs:
           dir
           cmake tools/translator/
           make
+          sudo find / -type d -name "xcibyl-translator"
           ./home/runner/work/cibyl/cibyl/build/bin/xcibyl-translator
 
 #          echo -- tree --
