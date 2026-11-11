@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.5)
+project(cibyl-translator)
+
 set (translator_SRCS
 	external/elfutils/dwarf_abbrev_hash.c
 	external/elfutils/dwarf_attr.c
