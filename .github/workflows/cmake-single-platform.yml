@@ -1,4 +1,3 @@
-# temp2
 # This starter workflow is for a CMake project running on a single platform. There is a different starter workflow if you need cross-platform coverage.
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
 name: CMake on a single platform
@@ -20,7 +19,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Cache Cibyl Toolchain
+      id: cache-toolchain
+      uses: actions/cache@v4
+      with:
+         path: toolchain/x-tools
+         key: cibyl-toolchain-${{ hashFiles('toolchain/**') }}
+
     - name: Build Compiler
+      if: steps.cache-toolchain.outputs.cache-hit != 'true'
       run: |
           sudo apt-get install help2man
           sudo apt-get install libtool-bin
@@ -28,19 +35,23 @@ jobs:
           pip install config
           
           echo -- Build the translator --
-          cmake tools/translator/
+          mkdir -p build-translator
+          cd build-translator
+          cmake ../tools/translator/
           make
           cd /home/runner/work/cibyl/cibyl/
-          dir
+
           echo -- Build the Compiler --
           cd toolchain
-          make #
-          echo -- Build the cibyl libraries --
+          make
           cd /home/runner/work/cibyl/cibyl/
-          dir
+
+          echo -- Build the cibyl libraries and install --
+          mkdir -p build
           cd build
           cmake ../
-
+          make
+          make install
 
 #          export PATH=$PATH:/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
 #          alias mips-cibyl-elf-gcc=/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin
