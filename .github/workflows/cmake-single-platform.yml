@@ -44,7 +44,7 @@ jobs:
 
           echo -- Build the Compiler --
           cd toolchain
-          make
+          CT_LOG_PROGRESS_BAR=n make
           cd /home/runner/work/cibyl/cibyl/
 
           echo -- Build the cibyl libraries and install --
