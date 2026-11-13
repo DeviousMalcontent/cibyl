@@ -19,6 +19,23 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install Dependencies 
+      run: |
+          sudo apt-get install help2man
+          sudo apt-get install libtool-bin
+          sudo apt-get install libelf-dev
+          sudo apt-get install python-is-python3
+          pip install config
+
+    - name: Build Translator
+      run: |
+          echo -- Build the translator --
+          mkdir -p build-translator
+          cd build-translator
+          cmake ../tools/translator/
+          make
+          cd /home/runner/work/cibyl/cibyl/
+
     - name: Restore Cibyl Toolchain Cache
       id: cache-toolchain
       uses: actions/cache/restore@v4
@@ -29,19 +46,6 @@ jobs:
     - name: Build Compiler
       if: steps.cache-toolchain.outputs.cache-hit != 'true'
       run: |
-          sudo apt-get install help2man
-          sudo apt-get install libtool-bin
-          sudo apt-get install libelf-dev
-          sudo apt-get install python-is-python3
-          pip install config
-          
-          echo -- Build the translator --
-          mkdir -p build-translator
-          cd build-translator
-          cmake ../tools/translator/
-          make
-          cd /home/runner/work/cibyl/cibyl/
-
           echo -- Build the Compiler --
           cd toolchain
           make
