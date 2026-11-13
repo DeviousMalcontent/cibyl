@@ -62,13 +62,15 @@ jobs:
       
     - name: Build Cibyl Libraries and Install
       run: |
-          mkdir -p build
-          cd build
-          cmake ../
-          make
-          make install
-          cd /home/runner/work/cibyl/cibyl/
-          tar -cjf /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf.tar.bz2 -C /home/runner/work/cibyl/cibyl/toolchain/x-tools mips-cibyl-elf
+        echo "/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin" >> $GITHUB_PATH
+        export PATH="/home/runner/work/cibyl/cibyl/toolchain/x-tools/mips-cibyl-elf/bin:$PATH"
+        mkdir -p build
+        cd build
+        cmake ../
+        make
+        make install
+        cd /home/runner/work/cibyl/cibyl/
+        tar -cjf /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf.tar.bz2 -C /home/runner/work/cibyl/cibyl/toolchain/x-tools mips-cibyl-elf
 
     - name: Upload Builds
       uses: actions/upload-artifact@v4
