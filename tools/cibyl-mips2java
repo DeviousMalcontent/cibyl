@@ -107,7 +107,7 @@ parser.add_option("--peephole-iterations", default=2,
                                   help="""Set the number of iterations to run the peephole optimizer (default 2)""",
                   dest="peepholeIterations", metavar="NR")
 parser.add_option("--javac-command-line", default=None,
-                                  help="""Set the javac command line. Default 'javac -source 1.4 -bootclasspath
+                                  help="""Set the javac command line. Default 'javac -source 8 -bootclasspath
 $WTK_PATH/lib/cldcapi11.jar:$WTK_PATH/lib/midpapi20.jar'. javac must
 support the -d and -classpath options, which are passed by the tool""",
                   dest="javacCommandLine", metavar="COMMAND_LINE")

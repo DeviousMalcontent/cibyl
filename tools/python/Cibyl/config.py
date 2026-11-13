@@ -81,7 +81,7 @@ def getBasePath():
 wtk = getWtkPath()
 
 jasminCommandLine=getBasePath() + "/bin/cibyl-jasmin"
-javacCommandLine="javac -source 1.4"
+javacCommandLine="javac -source 8"
 
 # setup some of the environment
 base_path = getBasePath()
