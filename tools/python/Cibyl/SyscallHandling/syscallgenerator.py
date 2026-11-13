@@ -270,7 +270,7 @@ class SyscallDatabaseGenerator(SyscallGenerator):
         sz = struct.calcsize("P")
 
         # Read all syscall directories
-        of = open(self.outfile, "w")
+        of = open(self.outfile, "wb")
         for curFile in self.files:
             for item in curFile.all:
                 if not isinstance(item, Function):
@@ -298,57 +298,38 @@ class SyscallDatabaseGenerator(SyscallGenerator):
         strtab_offs = arg_offs + sz * len(args) * 4
 
         # Write the header
-        data = struct.pack("P", 0x11b1c1d1)
-        hex_str = data.hex()
-        of.write(hex_str)
-        data2 = struct.pack("P", len(self.dirs))
-        dir_str = data2.hex()
-        of.write(dir_str)
-        data3 = struct.pack("P", len(self.syscallSets))
-        syscall_str = data3.hex()
-        of.write(syscall_str)
-        data4 = struct.pack("P", len(out))
-        out_str = data3.hex()
-        of.write(out_str)
-        data4 = (struct.pack("P", arg_offs))
-        arg_offs_str = data4.hex()
-        of.write(arg_offs_str)
-        data4 = struct.pack("P", strtab_offs)
-        strtab_offs_str = data4.hex()
-        of.write(strtab_offs_str)
+        of.write(struct.pack("P", 0x11b1c1d1))
+        of.write(struct.pack("P", len(self.dirs)))
+        of.write(struct.pack("P", len(self.syscallSets)))
+        of.write(struct.pack("P", len(out)))
+        of.write(struct.pack("P", arg_offs))
+        of.write(struct.pack("P", strtab_offs))
 
         # The path names, as strtab offsets
         for d in self.dirs:
             offs = self.add_str(os.path.abspath(d))
-        data5 = struct.pack("P", offs)
-        offs1_str = data5.hex()
-        of.write(offs1_str)
+            of.write(struct.pack("P", offs))
 
         # The syscall set names, as strtab offsets
         for s in self.syscallSets:
             offs = self.add_str(s)
-        data6 = struct.pack("P", offs)
-        offs2_str = data6.hex()
-        of.write(offs2_str)
+            of.write(struct.pack("P", offs))
 
         # Write the out structures
         arg_count = 0
         for s in out:
-            data7 = struct.pack("PPPPPPPPPPP",
+            of.write(struct.pack("PPPPPPPPPPP",
                                  s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8],
-                                 arg_count, 0)
+                                 arg_count, 0))
             arg_count = arg_count + sz * 4 * s[2]
-            ppp_str = data7.hex()
-            of.write(ppp_str)
 
         # Write the arguments
         for a in args:
-            data8 = struct.pack("PPPP", 0, a[0], a[1], a[2])
-            pppp_str = data8.hex()
-            of.write(pppp_str)
+            of.write(struct.pack("PPPP", 0, a[0], a[1], a[2]))
 
         # Write the string table
         for item in self.strs:
-            of.write(item + '\0')
+            of.write((item + '\0').encode('utf-8'))
 
         of.close()
+
