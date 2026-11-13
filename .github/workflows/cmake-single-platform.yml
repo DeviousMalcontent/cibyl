@@ -41,10 +41,12 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: toolchain/x-tools
-        key: cibyl-toolchain-${{ hashFiles('toolchain/**') }}
+        key: cibyl-toolchain-${{ hashFiles('toolchain/crosstool.config', 'toolchain/patches/**') }}
+        restore-keys: |
+                    cibyl-toolchain-
 
     - name: Build Compiler
-      if: steps.cache-toolchain.outputs.cache-hit != 'true'
+      if: hashFiles('toolchain/x-tools/mips-cibyl-elf/bin/mips-cibyl-elf-gcc') == ''
       run: |
           echo -- Build the Compiler --
           cd toolchain
@@ -65,6 +67,8 @@ jobs:
           cmake ../
           make
           make install
+          cd /home/runner/work/cibyl/cibyl/
+          tar -cjf /home/runner/work/cibyl/cibyl/toolchain/mips-cibyl-elf.tar.bz2 -C /home/runner/work/cibyl/cibyl/toolchain/x-tools mips-cibyl-elf
 
     - name: Upload Builds
       uses: actions/upload-artifact@v4
