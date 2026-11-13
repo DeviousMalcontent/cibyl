@@ -58,7 +58,7 @@ jobs:
       uses: actions/cache/save@v4
       with:
         path: toolchain/x-tools
-        key: cibyl-toolchain-${{ hashFiles('toolchain/**') }}
+        key: cibyl-toolchain-${{ hashFiles('toolchain/crosstool.config', 'toolchain/patches/**') }}
       
     - name: Build Cibyl Libraries and Install
       run: |
