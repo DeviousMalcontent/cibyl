@@ -11,21 +11,23 @@ SECTIONS
        	.data : ALIGN(16) { *(.data0) *(.data) *(.rodata.str1.4)  *(.rodata.cst4) *(.rodata.cst8) *(.reginfo) }
        	.rodata : ALIGN(16) { *(.rodata) *(.rodata.*) *(.gnu.linkonce.r.*) *(.cibylsetjmp) }
 
-	.ctors : ALIGN(4) {
-	       PROVIDE(__ctors_begin = .);
-	       *(.ctors)
-	       PROVIDE(__ctors_end = .);
+    .ctors : ALIGN(4) {
+            PROVIDE(__ctors_begin = .);
+            KEEP(*(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*)))
+            KEEP(*(.init_array .ctors))
+            PROVIDE(__ctors_end = .);
 	}
-	.dtors : ALIGN(4) {
-	       PROVIDE(__dtors_begin = .);
-	       *(.dtors)
-	       PROVIDE(__dtors_end = .);
-	}
+    .dtors : ALIGN(4) {
+            PROVIDE(__dtors_begin = .);
+            KEEP(*(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*)))
+            KEEP(*(.fini_array .dtors))
+            PROVIDE(__dtors_end = .);
+     }
        	.bss : ALIGN(16) {
 	     *(.bss) *(.scommon) *(.sbss)
 	}
 
-        /* Exported symbols (to Java) */
+    /* Exported symbols (to Java) */
 	.cibylexpsyms : { *(.cibylexpsyms) }
 	PROVIDE(__edata = .);
 
@@ -33,7 +35,9 @@ SECTIONS
 	. = 0xfd000000;
        	.cibylexceptionstrs : { *(.cibylexceptionstrs) }
 
-	/* The string table with the system call names */
+    /* The string table with the system call names */
 	. = 0xff000000;
-       	.cibylstrtab : { *(.cibylstrtab) }
+	.cibylstrtab : { *(.cibylstrtab) }
+
+    /DISCARD/ : { *(.MIPS.abiflags) *(.reginfo) *(.gnu.attributes) }
 }
