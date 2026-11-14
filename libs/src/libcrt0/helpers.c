@@ -24,15 +24,13 @@ static void atexit_run(void);
 
 static void run_list(unsigned long *start, unsigned long *end)
 {
-  unsigned long *addr = start;
+  unsigned long *p;
 
-  while (addr != end)
+  for (p = start; p != end; p++)
     {
-      unsigned long val = *addr;
-      void (*p)(void) = (void (*)(void))val;
-
-      p();
-      addr++;
+      void (*fn)(void) = (void (*)(void))*p;
+      if (*p != 0 && *p != (unsigned long)-1)
+        fn();
     }
 }
 
