@@ -20,6 +20,12 @@ On Ubuntu/Debian, install these with:
 sudo apt update && sudo apt install -y default-jdk make python3 wget tar bzip2
 ```
 
+## Current Windows Runtime Prerequisites
+
+The current binary release file ```mips-cibyl-elf.tar.bz2``` should run under [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+Within WSL, the same Linux Runtime Prerequisites are required. 
+
 ## Using the compiler to build a Hello, World!
 
 Latest version of the Cibyl environment can be downloaded from here:  https://github.com/DeviousMalcontent/cibyl/releases
@@ -50,5 +56,7 @@ java -jar program.jar
 ```
 
 The expected result is a Hello, World! to be printed on the screen.
+
+## Getting a J2ME (Java Platform, Micro Edition) emulator up and running
 
 ## Building the compiler from source
