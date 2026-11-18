@@ -40,7 +40,9 @@ echo 'export PATH="/path/to/install/dir/mips-cibyl-elf/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Then ```cd hello``` and run ```make```.
+Then ```cd examples/host-java/hello-world``` and run ```make```.
+
+**Note** examples directory is not currently included in this binary release file ```mips-cibyl-elf.tar.bz2```.
 
 After confirming that the jar executable has been compiled, run it with the following command:
 ```
